@@ -14,7 +14,13 @@
     "src/*",
     "data/*"
   ],
-  "keywords": [],
+  "keywords": [
+    "random",
+    "username",
+    "随机",
+    "中文",
+    "用户名"
+  ],
   "author": "Piki Lee",
   "license": "MIT",
   "devDependencies": {
