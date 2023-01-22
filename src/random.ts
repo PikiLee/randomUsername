@@ -1,7 +1,8 @@
 import { NameElements } from './types'
 
 const languagues = new Set([
-	'zh-Hans'
+	'zh-Hans',
+	'en'
 ])
 
 const generators = new Map()
@@ -25,6 +26,12 @@ function randomElement<T>(elements: T[]) {
 function randomName(localedNameElements: NameElements, language = 'zh-Hans') {
 	const randomAdjective = randomElement(localedNameElements.adjectives)
 	const randomNouns = randomElement(localedNameElements.nouns)
+	if (language === 'en') {
+		return () => {
+			return `${randomAdjective()} ${randomNouns()}`
+		}
+	}
+
 	return () => {
 		return `${randomAdjective()}的${randomNouns()}`
 	}
@@ -35,7 +42,7 @@ export async function random(language = 'zh-Hans') {
 		return generators.get(language)()
 	} else {
 		const localedNameElements = await getLocaledNameElements(language)
-		const random = randomName(localedNameElements)
+		const random = randomName(localedNameElements, language)
 		generators.set(language, random)
 		return random()
 	}
