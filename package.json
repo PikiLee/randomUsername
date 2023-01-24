@@ -1,7 +1,7 @@
 {
   "name": "@pikilee/random-username",
   "version": "1.0.2",
-  "description": "A starter template for ts projects.",
+  "description": "Generate random usernames.",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
