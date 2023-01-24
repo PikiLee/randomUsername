@@ -5,6 +5,11 @@ const languagues = new Set([
 	'en'
 ])
 
+const separators = new Map([
+	['zh-Hans', '的'],
+	['en', ' ']
+])
+
 const nameGenerators = new Map()
 
 export async function getLocaledNameElements(language = 'zh-Hans') {
@@ -33,7 +38,7 @@ function CreateNameGenerator(localedNameElements: NameElements, language = 'zh-H
 	}
 
 	return () => {
-		return `${adjectiveGenerator()}的${nounGenerator()}`
+		return `${adjectiveGenerator()}${separators.get(language)}${nounGenerator()}`
 	}
 }
 
