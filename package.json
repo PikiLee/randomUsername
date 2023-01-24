@@ -2,18 +2,20 @@
   "name": "@pikilee/random-username",
   "version": "1.0.2",
   "description": "Generate random usernames.",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
     "lint": "eslint --cache --fix .",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "build": "tsc --declaration"
+    "build": "tsc",
+    "prepack": "npm run build"
   },
   "files": [
     "dist/*",
     "data/*"
   ],
+  "types": "dist/src/index.d.ts",
   "keywords": [
     "random",
     "username",

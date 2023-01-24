@@ -17,7 +17,7 @@ export async function getLocaledNameElements(language = 'zh-Hans') {
 		throw new Error(`Language ${language} is not supported.`)
 	}
 
-	return import(`../data/${language}.json`)
+	return (await import(`../data/${language}.js`)).default
 }
 
 function createRandomGenerator<T>(elements: T[]) {
