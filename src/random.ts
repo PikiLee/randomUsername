@@ -5,7 +5,7 @@ const languagues = new Set([
 	'en'
 ])
 
-const generators = new Map()
+const nameGenerators = new Map()
 
 export async function getLocaledNameElements(language = 'zh-Hans') {
 	if (!languagues.has(language)) {
@@ -15,7 +15,7 @@ export async function getLocaledNameElements(language = 'zh-Hans') {
 	return import(`../data/${language}.json`)
 }
 
-function randomElement<T>(elements: T[]) {
+function createRandomGenerator<T>(elements: T[]) {
 	const els = new Set(elements)
 	return () => {
 		const index = Math.floor(Math.random() * els.size)
@@ -23,27 +23,27 @@ function randomElement<T>(elements: T[]) {
 	}
 }
 
-function randomName(localedNameElements: NameElements, language = 'zh-Hans') {
-	const randomAdjective = randomElement(localedNameElements.adjectives)
-	const randomNouns = randomElement(localedNameElements.nouns)
+function CreateNameGenerator(localedNameElements: NameElements, language = 'zh-Hans') {
+	const adjectiveGenerator = createRandomGenerator(localedNameElements.adjectives)
+	const nounGenerator = createRandomGenerator(localedNameElements.nouns)
 	if (language === 'en') {
 		return () => {
-			return `${randomAdjective()} ${randomNouns()}`
+			return `${adjectiveGenerator()} ${nounGenerator()}`
 		}
 	}
 
 	return () => {
-		return `${randomAdjective()}的${randomNouns()}`
+		return `${adjectiveGenerator()}的${nounGenerator()}`
 	}
 }
 
 export async function random(language = 'zh-Hans') {
-	if (generators.has(language)) {
-		return generators.get(language)()
+	if (nameGenerators.has(language)) {
+		return nameGenerators.get(language)()
 	} else {
 		const localedNameElements = await getLocaledNameElements(language)
-		const random = randomName(localedNameElements, language)
-		generators.set(language, random)
-		return random()
+		const nameGenerator = CreateNameGenerator(localedNameElements, language)
+		nameGenerators.set(language, nameGenerator)
+		return nameGenerator()
 	}
 }
