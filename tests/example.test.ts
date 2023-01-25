@@ -1,21 +1,21 @@
 import { test, expect, describe } from 'vitest'
-import { getLocaledNameElements, random } from '../random.js'
+import { getLocaledNameElements, random } from '../src/random.js'
 
-test('getLocaledNameElements', async () => { 
-	const result = await getLocaledNameElements()
+test('getLocaledNameElements', () => { 
+	const result = getLocaledNameElements()
 	expect(result).toHaveProperty('adjectives')
 	expect(result).toHaveProperty('nouns')
 })
 
 describe('random', () => {
-	test('zh-Hans', async () => { 
-		const result = await random()
+	test('zh-Hans', () => { 
+		const result = random()
 		expect(result).toBeTypeOf('string')
 		expect(result.length).toBeGreaterThan(0)
 	})
 
-	test('en', async () => { 
-		const result = await random('en')
+	test('en', () => { 
+		const result = random('en')
 		expect(result).toBeTypeOf('string')
 		expect(result.length).toBeGreaterThan(0)
 	})

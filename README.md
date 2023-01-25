@@ -19,15 +19,15 @@ pnpm install @pikilee/random-username
 ```js
 import { random } from "@pikilee/random-username";
 
-random().then((username) => {
-    console.log(username) // => "开心的河马"
-})
+random() // => "开心的河马"
 
-random("en").then((username) => {
-    console.log(username) // => "Fearless Cat"
-}) 
+random("en") => // "Fearless Cat"
 ```
 
 # API
 ## random(language = "zh-Hans")
 Get a random username.
+
+### language
+Supports: `en`, `zh-Hans`
+Default: `zh-Hans`

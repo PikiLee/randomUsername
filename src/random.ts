@@ -1,23 +1,24 @@
-import { NameElements } from './types'
+import { Language, NameElements } from './types'
+import data from './data'
 
-const languagues = new Set([
+const languagues = new Set<Language>([
 	'zh-Hans',
 	'en'
 ])
 
-const separators = new Map([
+const separators = new Map<Language, string>([
 	['zh-Hans', '的'],
 	['en', ' ']
 ])
 
 const nameGenerators = new Map()
 
-export async function getLocaledNameElements(language = 'zh-Hans') {
+export function getLocaledNameElements(language: Language = 'zh-Hans') {
 	if (!languagues.has(language)) {
 		throw new Error(`Language ${language} is not supported.`)
 	}
 
-	return (await import(`../data/${language}.js`)).default
+	return data[language]
 }
 
 function createRandomGenerator<T>(elements: T[]) {
@@ -28,7 +29,7 @@ function createRandomGenerator<T>(elements: T[]) {
 	}
 }
 
-function CreateNameGenerator(localedNameElements: NameElements, language = 'zh-Hans') {
+function CreateNameGenerator(localedNameElements: NameElements, language: Language = 'zh-Hans') {
 	const adjectiveGenerator = createRandomGenerator(localedNameElements.adjectives)
 	const nounGenerator = createRandomGenerator(localedNameElements.nouns)
 	if (language === 'en') {
@@ -42,11 +43,11 @@ function CreateNameGenerator(localedNameElements: NameElements, language = 'zh-H
 	}
 }
 
-export async function random(language = 'zh-Hans') {
+export function random(language: Language = 'zh-Hans') {
 	if (nameGenerators.has(language)) {
 		return nameGenerators.get(language)()
 	} else {
-		const localedNameElements = await getLocaledNameElements(language)
+		const localedNameElements = getLocaledNameElements(language)
 		const nameGenerator = CreateNameGenerator(localedNameElements, language)
 		nameGenerators.set(language, nameGenerator)
 		return nameGenerator()
