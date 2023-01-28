@@ -1,6 +1,6 @@
 {
-  "name": "@pikilee/random-username",
-  "version": "2.0.0",
+  "name": "@piki.me/random-username-go",
+  "version": "2.0.1",
   "description": "Generate random usernames.",
   "main": "dist/src/index.js",
   "type": "module",
