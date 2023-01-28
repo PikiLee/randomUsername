@@ -2,12 +2,12 @@
 
 ## NPM
 ```
-npm install @pikilee/random-username
+npm install @piki.me/random-username
 ```
 
 ## Yarn
 ```
-yarn add @pikilee/random-username
+yarn add @piki.me/random-username
 ```
 
 ## PNPM
@@ -17,7 +17,7 @@ pnpm install @piki.me/random-username
 
 # Usage
 ```js
-import { random } from "@pikilee/random-username";
+import { random } from "@piki.me/random-username";
 
 random() // => "开心的河马"
 
