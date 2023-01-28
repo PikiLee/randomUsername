@@ -12,7 +12,7 @@ yarn add @pikilee/random-username
 
 ## PNPM
 ```
-pnpm install @pikilee/random-username
+pnpm install @piki.me/random-username
 ```
 
 # Usage
